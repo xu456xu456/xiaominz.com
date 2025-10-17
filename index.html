@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新西兰笑谜网 · XIAOMINZ | Smile & Riddle NZ</title>
+  <style>
+    body {
+      font-family: "PingFang SC","Noto Sans CJK","Helvetica Neue",Arial,sans-serif;
+      background-color: #fffefc;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    h1 { font-size: 2.4em; color: #222; margin-bottom: 8px; text-align: center; }
+    h2 { font-size: 1.3em; color: #666; font-weight: 400; margin-top: 0; text-align: center; }
+    h3 {
+      color: #0077cc; margin-top: 40px; border-bottom: 2px solid #0077cc33;
+      padding-bottom: 6px; width: 100%; max-width: 680px;
+    }
+    p { max-width: 720px; line-height: 1.8; font-size: 1.05em; margin: 10px auto; text-align: left; }
+    .eng { color: #777; font-size: 0.9em; font-style: italic; margin-bottom: 12px; }
+    .joke, .riddle {
+      background: #f7faff; border-left: 4px solid #0077cc; border-radius: 6px;
+      padding: 10px 14px; margin: 12px 0;
+    }
+    .btns { margin: 12px 0 6px; display:flex; gap:10px; flex-wrap:wrap; }
+    button {
+      background:#0077cc; color:#fff; border:none; border-radius:6px; padding:10px 14px;
+      font-weight:700; cursor:pointer; transition: background .2s;
+    }
+    button:hover { background:#005fa3; }
+    .hint { color:#888; font-size:.92em; margin-top:6px; }
+    footer { margin-top: 60px; font-size: 0.9em; color: #777; text-align: center; }
+    .sep { height:8px; }
+  </style>
+</head>
+<body>
+  <h1>新西兰笑谜网 · XIAOMINZ</h1>
+  <h2>笑一笑 · 猜一猜 · 心情妙（新西兰站）</h2>
+
+  <p>
+    “XIAOMI” 在这里取意为 <b>笑谜</b>：笑话 + 谜语。我们希望在南半球的清风里，多给你一点轻松与灵感。
+  </p>
+  <p class="eng">
+    “XIAOMI” here means <b>“Smile & Riddle”</b> — quick laughs and tiny puzzles for a lighter day.
+  </p>
+
+  <!-- 固定展示（示例） -->
+  <h3>😄 五个短笑话 | Five Short Jokes</h3>
+  <div id="fixedJokes">
+    <div class="joke">1️⃣ 朋友说要断舍离，于是把闹钟先删了，结果把工作也“离”了。</div>
+    <div class="joke">2️⃣ 我问天气预报准不准，它说：我预报心情更准——周一多云转低落。</div>
+    <div class="joke">3️⃣ 咖啡店写着“今日特调”，喝完我也特别想调休。</div>
+    <div class="joke">4️⃣ 手机提示：存储空间不足。钱包回应：我懂你。</div>
+    <div class="joke">5️⃣ 我在减肥和宵夜中间选择了折中方案：吃得更安静一点。</div>
+  </div>
+
+  <div class="btns">
+    <button id="btnJokes">🎲 随机笑话 ×5  / Random 5 Jokes</button>
+  </div>
+  <div id="randomJokes"></div>
+  <div class="hint eng">Click to get 5 random short jokes.</div>
+
+  <div class="sep"></div>
+
+  <h3>🧩 五个小谜语 | Five Little Riddles</h3>
+  <div id="fixedRiddles">
+    <div class="riddle">1️⃣ 两头尖，爱打盹，一醒就写字。（打一日常物）</div>
+    <div class="riddle">2️⃣ 身穿白衣，肚里雪花，见热就消融。（打一食物）</div>
+    <div class="riddle">3️⃣ 一条细龙，肚里藏光，夜里不眠。（打一电器）</div>
+    <div class="riddle">4️⃣ 远看像伞，近看有环，不怕风吹只怕手抖。（打一交通物）</div>
+    <div class="riddle">5️⃣ 一把钥匙开众门，人人都有它。（打一人体）</div>
+  </div>
+
+  <div class="btns">
+    <button id="btnRiddles">🎯 随机谜语 ×5  / Random 5 Riddles</button>
+  </div>
+  <div id="randomRiddles"></div>
+  <div class="hint eng">Click to get 5 random riddles (no answers shown).</div>
+
+  <p style="margin-top:30px;font-weight:bold;color:#444;">
+    更多笑话与谜语持续补充中。<br>
+    <span class="eng">More jokes & riddles are coming soon.</span>
+  </p>
+
+  <p style="margin-top:30px;">
+    联系 / Contact：<a href="mailto:xu456xu@gmail.com">xu456xu@gmail.com</a>
+  </p>
+
+  <footer>
+    © XIAOMINZ.com · Smile & Riddle NZ · 笑谜网新西兰站
+    <br>
+    <small style="color:#999;display:block;margin-top:6px;">
+      若要访问澳洲站，请前往
+      <a href="https://XIAOMIAUS.com" target="_blank" rel="noopener">澳洲笑谜网（XIAOMIAUS.com）</a>。
+      <br>
+      本网站与任何现存科技公司无任何关联或合作关系，仅为个人创意与娱乐用途。
+    </small>
+  </footer>
+
+  <script>
+    // 50条全新中文短笑话（与澳洲站不同，健康向）
+    const JOKES = [
+      "起床最难的不是闹钟，而是“再睡五分钟”的魔法。",
+      "今天跑步五公里，打开地图一看：原地画了个圈。",
+      "我买了个早起课程，结果成了晚睡教程。",
+      "同事说要学习理财，第一步是别点外卖，我点头，然后点了便宜一点的。",
+      "生活把我按下了暂停，我反手按了个继续缓冲。",
+      "我不是内向，我是省电模式。",
+      "周一像砂纸，把我的热情打磨得很细。",
+      "我问健身教练怎么瘦，他说先把外卖APP卸了，我说那我先卸载教练。",
+      "电梯里有人问几层，我说“高层建筑”，从此沉默是金。",
+      "我的爱好是做计划，特长是不执行。",
+      "今天的运气像我的Wi-Fi：时断时续，勉强能用。",
+      "朋友圈都是阳光，我这边主要阴天转小雨。",
+      "我和被子很合拍，天天都想在一起。",
+      "我不是穷，是钱包进入了量子态：看得到，取不出。",
+      "我决定早睡，结果手机决定开会。",
+      "喝水养生很有用，尤其是配着奶茶一起喝的时候。",
+      "我安慰朋友：别难过，至少我们还年轻——在心态上。",
+      "刚想努力，沙发给了我一个拥抱。",
+      "打开冰箱寻找灵感，结果只找到了夜宵。",
+      "人生建议：少生气多深呼吸，最好吸到睡着。",
+      "我对自己说“要自律”，结果自己把我拉黑了。",
+      "早起和我谈判：再给我十分钟，我就继续睡。",
+      "同事问我有什么梦想，我说：午睡合法化。",
+      "今天风很大，刚好把我的动力吹走了。",
+      "我不是不爱运动，我是向往灵魂的自由落体。",
+      "老板问KPI进度，我说在蓄力，像弹簧。",
+      "外卖备注“少油少盐”，结果只有“少”。",
+      "理发师问要不要修眉，我说先修复心情。",
+      "今天学会乐观：把难题改名叫“挑战”。",
+      "手机提示我久坐，我回应它：彼此彼此。",
+      "我制定了清单：第一条——写清单。",
+      "朋友说我变成熟了，我说那是因为生得太久了。",
+      "周末安排：把“待办”搬到“待会儿”。",
+      "我开了飞行模式，准备原地起飞——睡觉。",
+      "买了记事本，记录“为什么还没记”。",
+      "我不是懒，是和地心引力关系太好。",
+      "热量不会凭空消失，它只会变成情感的重量。",
+      "今天的微笑由口罩赞助。",
+      "同事请我喝美式，我问能不能加点生活的甜。",
+      "我把“加油”设成闹钟名，每天都被催更人生。",
+      "我问时间去哪儿了，时间说在你刷视频那里。",
+      "会议讨论很激烈，唯一的共识是都想早点结束。",
+      "我给自己打鸡血，结果变成了卤味。",
+      "学会了一个新技能：在不合时宜的时候清醒。",
+      "钱包跟我说：别担心，我一直很稳定。",
+      "想吃夜宵时，我会先喝水——然后配夜宵一起喝。",
+      "工作像叠罗汉，我是最底下那个稳重的人。",
+      "我不是单身，我在和自由谈恋爱。",
+      "计划赶不上变化，变化赶不上外卖员。",
+      "我决定做一个温柔的人，先对自己温柔点：再睡会儿。"
+    ];
+
+    // 30条全新谜语（不含答案，内容与澳洲站不同）
+    const RIDDLES = [
+      "头戴红盖，身披绿衣，生来怕冷，见火欢喜。（打一食材）",
+      "不是月亮挂天边，却能照亮你的脸。（打一日常物）",
+      "身材细长会唱歌，不在舞台在指尖。（打一乐器）",
+      "身上有牙不吃饭，越转越忙不说话。（打一工具）",
+      "有门没人住，有窗不透风，天天有人敲。（打一电子物）",
+      "白天藏身黑夜游，身后拖着一条油。（打一自然现象）",
+      "一头装水一头火，中间吐白雾。（打一厨房物）",
+      "一根银针，飞在屋顶，牵来天上的线。（打一设施）",
+      "脚踩两条线，越走越向前，不会回头看。（打一交通物）",
+      "身穿青袍肚里空，能盛百物不出门。（打一器皿）",
+      "一只小白船，夜里天上转，十五更饱满。（打一天体）",
+      "有眼不会看，有心不会跳，能把远方装进来。（打一物）",
+      "生在水里不怕湿，离开水面唱歌忙。（打一自然现象）",
+      "身披银甲不出门，遇到敌人吐长针。（打一动物）",
+      "有影无形，有声无体，常把人带进故事里。（打一传播物）",
+      "一身皮卷住肠衣，出门离不开火。（打一食物）",
+      "四四方方一张口，吞下知识不点头。（打一学习用品）",
+      "个头不大力气大，拖来铁龙不停下。（打一机器）",
+      "不喝水也能游，走在长街头顶牛。（打一建筑设施）",
+      "一物两面，白天黑脸，晚上白脸。（打一器具）",
+      "身穿花衣会报时，晴天站岗雨天藏。（打一自然物）",
+      "有齿不能咬，有骨不长肉，一天要跑好多遍。（打一家居物）",
+      "一把弯刀不砍人，只把青草变整齐。（打一工具）",
+      "白墙一块黑画框，窗外世界搬进房。（打一电器）",
+      "一个圆筒两头开，千里之声耳边来。（打一物）",
+      "白天睡觉夜里忙，帮人指路亮光芒。（打一公共物）",
+      "不是鱼儿水里游，却把船儿牵着走。（打一自然力）",
+      "身穿黄袍地里站，秋来笑得弯了腰。（打一农作物）",
+      "一个口袋两只脚，走遍城市不说话。（打一交通工具）",
+      "一条细线挂天边，云来云去不相连。（打一自然现象）"
+    ];
+
+    function pickN(arr, n) {
+      const used = new Set();
+      const out = [];
+      while (out.length < n && used.size < arr.length) {
+        const i = Math.floor(Math.random() * arr.length);
+        if (!used.has(i)) { used.add(i); out.push(arr[i]); }
+      }
+      return out;
+    }
+
+    function renderList(arr, mountId, cls) {
+      const html = arr.map((t, i) => `<div class="${cls}">${i+1}️⃣ ${t}</div>`).join("");
+      document.getElementById(mountId).innerHTML = html;
+    }
+
+    document.getElementById("btnJokes").addEventListener("click", () => {
+      const five = pickN(JOKES, 5);
+      renderList(five, "randomJokes", "joke");
+    });
+
+    document.getElementById("btnRiddles").addEventListener("click", () => {
+      const five = pickN(RIDDLES, 5);
+      renderList(five, "randomRiddles", "riddle");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xiaominz.com/sitemap.xml
